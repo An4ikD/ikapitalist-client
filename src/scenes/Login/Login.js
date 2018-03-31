@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import { userAction } from '../../actions/user.actions';
-import { userService } from '../../services/user.services';
 
 class Login extends Component {
   constructor(props) {

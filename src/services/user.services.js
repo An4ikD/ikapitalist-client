@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { userConstants } from '../constants/user.constants';
 
 export const userService = {
   login,
@@ -13,15 +14,15 @@ function login(email, password) {
   })
   .then(response => response.data)
   .then(data => {
-    localStorage.setItem('idToken', data.auth_token);
-    localStorage.setItem('kapitalistUser', data.user);
+    localStorage.setItem(userConstants.ID_TOKEN, data.auth_token);
+    localStorage.setItem(userConstants.USER, data.user);
     return data;
   });
 }
 
 function logout() {
-  localStorage.removeItem('idToken');
-  localStorage.removeItem('kapitalistUser');
+  localStorage.removeItem(userConstants.ID_TOKEN);
+  localStorage.removeItem(userConstants.USER);
 }
 
 function register(email, password, password_confirmation) {

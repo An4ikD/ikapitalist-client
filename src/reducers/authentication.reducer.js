@@ -1,7 +1,7 @@
 import { userConstants } from '../constants/user.constants';
 
-let idToken = localStorage.getItem('idToken');
-let user = JSON.parse(localStorage.getItem('kapitalistUser'));
+let idToken = localStorage.getItem(userConstants.ID_TOKEN);
+let user = JSON.parse(localStorage.getItem(userConstants.USER));
 
 const initialState = idToken ? { loggedIn: true, user } : {};
 
