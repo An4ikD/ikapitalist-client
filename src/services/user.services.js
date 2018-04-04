@@ -7,9 +7,9 @@ export const userService = {
   logout
 };
 
-function login(email, password) {
+function login(username, password) {
   return axios.post('http://localhost:3000/api/v1/authenticate', {
-    email: email,
+    username: username,
     password: password
   })
   .then(response => response.data)
@@ -25,13 +25,13 @@ function logout() {
   localStorage.removeItem(userConstants.USER);
 }
 
-function register(email, password, password_confirmation) {
-  axios({
+function register(username, password, password_confirmation) {
+  return axios({
     method: 'POST',
     url: 'http://localhost:3000/api/v1/register',
     data: {
       user: {
-        email: email,
+        username: username,
         password: password,
         password_confirmation: password_confirmation
       }  
@@ -39,7 +39,7 @@ function register(email, password, password_confirmation) {
   })
   .then(response => {
     console.log(response);
-    return response;
+    return response.data;
   })
   .catch(error => {
     console.log(error);

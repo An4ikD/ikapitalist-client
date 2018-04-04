@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { projectAction } from '../../actions/project.actions';
 
 class Home extends Component {
   constructor(props) {
@@ -9,37 +8,15 @@ class Home extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    this.props.getAll();
-  }
-
   render() {
-
-    const projects = this.props.projects.map((project) => {
-      return (
-        <li key={project.id}>
-          {project.name}
-        </li>
-      );
-    });
     return (
       <div>
         <h2>
-          <Link to={{
-            pathname: '/login',
-            state: { redirectTo: '/aminvestor' }
-          }}>Я Инвестор</Link>
+          <Link to={'/aminvestor'}>Я Инвестор</Link>
         </h2>
         <h2>
-          <Link to={{
-            pathname: '/login',
-            state: { redirectTo: '/ambusinessman'}
-          }}>Я Бизнесмен</Link>
+          <Link to={'/ambusinessman'}>Я Бизнесмен</Link>
         </h2>
-
-        <ul>
-          {projects}
-        </ul>
       </div>
     );
   }
@@ -47,19 +24,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   const { authentication } = state;
-  const { project } = state;
   return {
-    user: authentication.user,
-    projects: project.projects
+    user: authentication.user
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAll: () => {
-      dispatch(projectAction.getAll());
-    }
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
+export default withRouter(connect(mapStateToProps)(Home));

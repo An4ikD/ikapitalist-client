@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 import { userAction } from '../../actions/user.actions';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
       redirectToReferrer: false
     };
@@ -21,27 +21,32 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let email = this.state.email;
+    let username = this.state.username;
     let password = this.state.password;
-    this.props.login(email, password);
+    this.props.login(username, password);
   }
 
   render() {
     const { redirectTo } = this.props.location.state || { redirectTo: '/' };
-/*    if (this.props.loggedIn) {
+    if (this.props.loggedIn) {
       return <Redirect to={redirectTo} />;
-    }*/
+    }
 
     return (
       <div>
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+          <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
           <br />
           <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
           <br />
           <button type="submit">Войти</button>
         </form>
+        <div>
+          <h2>
+            <Link to={{pathname: "/register", state: { redirectTo: redirectTo }}}>Register</Link>
+          </h2>
+        </div>
       </div>
     );
   }
@@ -49,17 +54,17 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (email, password) => {
-      dispatch(userAction.login(email, password));
+    login: (username, password) => {
+      dispatch(userAction.login(username, password));
     }
   }
-}
+};
 
 const mapStateToProps = (state) => {
   const { authentication } = state;
   return {
     loggedIn: authentication.loggedIn
   };
-}
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

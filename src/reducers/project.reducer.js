@@ -12,7 +12,8 @@ export const project = (state = initialState, action) => {
       }
     case projectConstants: GET_ALL_FAILURE:
       return {
-        state
+        ...state,
+        projects: []
       }
     default:
       return state;

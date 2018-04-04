@@ -6,10 +6,10 @@ export const userAction = {
   logout
 };
 
-function login(email, password) {
+function login(username, password) {
   return dispatch => {
-    dispatch(request({email}));
-    userService.login(email, password)
+    dispatch(request({username}));
+    userService.login(username, password)
       .then(data => {
         dispatch(success(data.user, data.auth_token));
       })
