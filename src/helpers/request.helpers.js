@@ -18,10 +18,11 @@ function nonAuthorized(url, method, data) {
 
 function authorized(url, method, data) {
   const idToken = localStorage.getItem(userConstants.ID_TOKEN);
+  console.log(idToken);
   return axios({
     url: baseUrl + url,
     method: method,
     data: data,
-    headers: {'Authorization': idToken}
+    headers: {'Authorization': idToken, 'Content-Type': 'application/json'}
   });
 }

@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { userConstants } from '../constants/user.constants';
+import { requestHelper } from '../helpers/request.helpers';
 
 export const userService = {
   login,
   register,
-  logout
+  logout,
+  edit
 };
 
 function login(username, password) {
@@ -38,10 +40,18 @@ function register(username, password, password_confirmation) {
     }
   })
   .then(response => {
-    console.log(response);
     return response.data;
   })
   .catch(error => {
     console.log(error);
   })
+}
+
+function edit(user) {
+  return requestHelper.authorized('/api/v1/users/' + user.id, 'PATCH', { user: user })
+                      .then(response => response.data)
+                      .then(data => {
+                        localStorage.setItem(userConstants.USER, data.user);
+                        return data;
+                      });
 }

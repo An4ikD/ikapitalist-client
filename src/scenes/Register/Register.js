@@ -32,7 +32,6 @@ class Register extends Component {
   }
 
   render() {
-    console.log(this.props.location.state);
     if (this.state.registrationSuccess) {
       const { redirectTo } = this.props.location.state || { redirectTo: '/' };
       return (

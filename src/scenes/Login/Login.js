@@ -28,6 +28,7 @@ class Login extends Component {
 
   render() {
     const { redirectTo } = this.props.location.state || { redirectTo: '/' };
+    console.log(redirectTo);
     if (this.props.loggedIn) {
       return <Redirect to={redirectTo} />;
     }
@@ -61,9 +62,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  const { authentication } = state;
+  const { user } = state;
   return {
-    loggedIn: authentication.loggedIn
+    loggedIn: user.loggedIn
   };
 };
 

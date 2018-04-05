@@ -3,7 +3,8 @@ import { userService } from '../services/user.services';
 
 export const userAction = {
   login,
-  logout
+  logout,
+  edit
 };
 
 function login(username, password) {
@@ -28,4 +29,20 @@ function logout() {
   return {
     type: userConstants.LOGOUT
   };
+}
+
+function edit(user) {
+  return dispatch => {
+    userService.edit(user)
+      .then(data => {
+        console.log(data);
+        dispatch(success(data.user));
+      })
+      .catch(error => {
+        dispatch(failure(error));
+      });
+  }
+
+  function success(user) { return { type: userConstants.EDIT_SUCCESS, user: user } }
+  function failure(error) { return { type: userConstants.EDIT_FAILURE, error } }
 }

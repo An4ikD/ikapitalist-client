@@ -42,10 +42,10 @@ class Investor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { authentication } = state;
+  const { user } = state;
   const { project } = state;
   return {
-    loggedIn: authentication.loggedIn,
+    loggedIn: user.loggedIn,
     projects: project.projects
   };
 };

@@ -23,9 +23,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { authentication } = state;
+  const { user } = state;
   return {
-    user: authentication.user
+    user: user.user
   };
 };
 
